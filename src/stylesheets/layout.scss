@@ -1,0 +1,33 @@
+@mixin bgColor($color) {
+	background-color: $color;
+}
+
+* {margin: 0; padding: 0}
+
+html {
+	font: {
+		size: 14px;
+		family: Arial;
+	}
+}
+
+a {text-decoration: none;}
+ul {list-style: none;}
+
+#app {
+	min: {
+		height: 600px;
+		width: 960px;
+	}
+
+	width: 100%;
+	height: 100%;
+	padding-top: 1em + 0.85 * 2 + 1;
+	transition: all .5s linear;
+}
+
+.white { @include bgColor(#fff); }
+.blue { @include bgColor(#5ea4cd); }
+.red { @include bgColor(#db6767); }
+.green { @include bgColor(#5ec98e); }
+.yellow { @include bgColor(#e0ec3e); }
