@@ -1,8 +1,8 @@
 {
-  "name": "english-ppt",
+  "name": "speech-draft",
   "version": "0.0.1",
   "description": "just a lecture in English class with PPT",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
