@@ -1,4 +1,6 @@
 export default {
 	list: ['Start', 'Category', 'Development', 'End'],
-	color: 'white'
+	color: 'white',
+	title: undefined,
+	activeIndex: [0, 0, 0, 0]
 }

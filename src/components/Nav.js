@@ -10,22 +10,19 @@ export default class Nav extends Component {
 		this.btns = []
 		this.onSwitch = this.props.onSwitch
 		this.onClick = this.onClick.bind(this)
+		this.listCache = this.listCache.bind(this)
 	}
 
 	render() {
-		const colorLen = backgroundColor.length
+		if(this.btns)	this.refreshHref(this.props.activeIndex)
 
-		const list = this.props.list.map((title, index) => {
-			const hrefURL = `#/${title}`
-			const color = backgroundColor[index % colorLen]
-
-			return <li key={index}><a className={wavesClassName} href={hrefURL} onClick={() => this.onClick({color, index})} ref={self => this.btns.push(findDOMNode(self))}>{title}</a></li>
-		})
+		const title = this.props.title ? (<h1>{this.props.title}</h1>) : undefined
+		const list = this.listCache(this.props.list)
 
 		return (
 			<nav id='nav'>
 				<ul>{list}</ul>
-				<h1>{}</h1>
+				{title}
 			</nav>
 		)
 	}
@@ -35,16 +32,14 @@ export default class Nav extends Component {
 		Waves.attach(`.${wavesClassName}`, ['waves-button', 'waves-effect'])
 	}
 
-	shouldComponentUpdate(nextProps, ) {return false}
-
-	onClick({color, index}) {
+	onClick({color, title, index}) {
 		let last = index
 		let next = index
 		let count = 1
 		const btns = this.btns
 		const length = btns.length
 
-		this.onSwitch(color)
+		this.onSwitch(color, title)
 		while(last > -1 || next < length) {
 			spread(btns[--last], 'up')
 			spread(btns[++next], 'down')
@@ -78,8 +73,34 @@ export default class Nav extends Component {
 			}), 350 * count)
 		}
 	}
+
+	listCache(list) {
+		this.list = this.list || (function() {
+			const colorLen = backgroundColor.length
+
+			return list.map((title, index) => {
+				const hrefURL = `#/${title}/0`
+				const color = backgroundColor[index % colorLen]
+
+				return <li key={index}><a className={wavesClassName} href={hrefURL} onClick={() => this.onClick({color, title, index})} ref={self => {this.btns.push(findDOMNode(self))}}>{title}</a></li>
+			})
+		}).call(this)
+
+		return this.list
+	}
+
+	refreshHref(activeIndex) {
+		this.btns.forEach((node, index) => {
+			node.href = node.href.replace(/(\d*)$/, activeIndex[index])
+		})
+	}
 }
 
-Nav.propTypes = {list: PropTypes.arrayOf(PropTypes.string)}
+Nav.propTypes = {
+	title: PropTypes.string,
+	list: PropTypes.arrayOf(PropTypes.string),
+	activeIndex: PropTypes.arrayOf(PropTypes.number),
+	onSwitch: PropTypes.func
+}
 
-// {list: ['start', 'end']}
+// {list: ['start', 'end'], title: 'Start'}

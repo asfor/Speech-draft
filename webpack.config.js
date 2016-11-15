@@ -1,11 +1,11 @@
 module.exports = {
-	devtool: 'eval-source-map',
+	// devtool: 'eval-source-map',
 	entry: {
 		app: ['./src/index.js']
 	},
 	output: {
-		path: './dist',
-		publicPath: '/dist/',
+		path: './',
+		publicPath: '/',
 		filename: 'bundle.js'
 	},
 	module: {

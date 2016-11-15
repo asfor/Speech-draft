@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {changeBackground} from '../action'
+import {changeBackground, switchView} from '../action'
 import Nav from './Nav'
 import Body from './Body'
 import '../stylesheets/waves.scss'
@@ -8,19 +8,27 @@ import '../stylesheets/layout.scss'
 
 class Page extends Component {
 	render() {
-		const {color, list, onSwitch} = this.props
+		const {
+			color, list, title, activeIndex,
+			onSwitch, switchView
+		} = this.props
 
 		return (
 			<div id='app' className={color}>
-				<Nav list={list} onSwitch={onSwitch} />
-				<Body />
+				<Nav list={list} title={title} activeIndex={activeIndex} onSwitch={onSwitch} />
+				<Body switchView={switchView} />
 			</div>
 		)
 	}
 }
 
 Page.propTypes = {
-	list: PropTypes.arrayOf(PropTypes.string)
+	color: PropTypes.string,
+	list: PropTypes.arrayOf(PropTypes.string),
+	title: PropTypes.string,
+	activeIndex: PropTypes.arrayOf(PropTypes.number),
+	onSwitch: PropTypes.func,
+	switchView: PropTypes.func
 }
 
 function mapStateToProps(state) {
@@ -29,7 +37,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onSwitch: color => {dispatch(changeBackground(color))}
+		onSwitch: (color, title) => {dispatch(changeBackground(color, title))},
+		switchView: (title, activeIndex) => {dispatch(switchView(title, activeIndex))}
 	}
 }
 
@@ -38,4 +47,9 @@ export default connect(
 	mapDispatchToProps
 )(Page)
 
-// {list: ['start', 'end']}
+// {
+// 	color: 'red',
+// 	list: ['start', 'end'],
+// 	title: 'Start',
+// 	onSwitch: function(){...}
+// }
