@@ -1,0 +1,30 @@
+#icons {
+	position: relative;
+	top: 90px;
+	text-align: center;
+
+	li {
+		position: static;
+		display: inline;
+		padding: 0 3%;
+
+		img {
+			transform: scale(0);
+			border-radius: 20px;
+			width: 9%;
+		}
+	}
+}
+
+.start-2, .start-3{
+	& > div {
+		text-align: center;
+
+		img {
+			$harf-distance: 10%;
+			$harf-hr: 1px solid #333;
+
+			width: 40%;
+		}
+	}
+}

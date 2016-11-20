@@ -33,9 +33,22 @@ $overTime: .5s;
 			position: absolute;
 			height: 100%;
 			width: 100%;
-			padding: 20px;
+			padding: 30px 40px;
 			box-sizing: border-box;
 			transition: $overTime ease-out;
+
+			div {
+				font-size: 2em;
+				line-height: 1.6em;
+
+				p {
+					padding-bottom: 20px;
+					text: {
+						align: justify;
+						indent: 2em;
+					}
+				}
+			}
 		}
 	}
 

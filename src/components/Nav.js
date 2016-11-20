@@ -14,8 +14,6 @@ export default class Nav extends Component {
 	}
 
 	render() {
-		if(this.btns)	this.refreshHref(this.props.activeIndex)
-
 		const title = this.props.title ? (<h1>{this.props.title}</h1>) : undefined
 		const list = this.listCache(this.props.list)
 
@@ -87,12 +85,6 @@ export default class Nav extends Component {
 		}).call(this)
 
 		return this.list
-	}
-
-	refreshHref(activeIndex) {
-		this.btns.forEach((node, index) => {
-			node.href = node.href.replace(/(\d*)$/, activeIndex[index])
-		})
 	}
 }
 

@@ -1,13 +1,15 @@
 import React, {Component, PropTypes} from 'react'
+import Promise from 'promise'
 
 export default class Content extends Component {
 	constructor(props, title) {
 		super(props)
-		this.id = this.props.route.id
-		this.activeIndex = 0
 		this.switchView = this.switchView.bind(this, title)
 		this.listenMouseWheel = this.listenMouseWheel.bind(this)
+		this.animations = {}
 	}
+	
+	componentDidMount() {this.switchView(0)}
 
 	pack(bodies, activeIndex) {
 		const list = bodies.map((body, index) => {
@@ -35,10 +37,12 @@ export default class Content extends Component {
 
 	switchView(title, activeIndex) {
 		this.activeIndex = activeIndex
-		this.props.route.switchView(this.id, activeIndex)
 		this.props.router.push({
 			pathname: `/${title}/${activeIndex}`
 		})
+
+		const animation = this.animations[activeIndex]
+		if(animation) animation(this.animations, activeIndex)
 	}
 
 	listenMouseWheel(event) {
@@ -46,8 +50,21 @@ export default class Content extends Component {
 		if(nextIndex < 0 || nextIndex >= this.pagesLen) return
 		this.switchView(nextIndex)
 	}
-}
 
-Content.propTypes = {
-	switchView: PropTypes.func,
+	animation(node, styleObj, duration, wait, callback) {
+		styleObj.transition = parseFloat(duration/1000).toFixed(2) + 's linear'
+
+		for(var key in styleObj)
+			node.style[key] = styleObj[key]
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, wait)
+		}).then(callback)
+	}
+
+	run(tasks) {
+		const start = new Promise((resolve, reject) => {
+			setTimeout(resolve, 500)
+		}).then(tasks)
+	}
 }

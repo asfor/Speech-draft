@@ -6,13 +6,3 @@ export function changeBackground(color, title) {
 		title
 	}
 }
-
-
-export const SWITCH_VIEW = 'SWITCH_VIEW'
-export function switchView(index, activeIndex) {
-	return {
-		type: SWITCH_VIEW,
-		index,
-		activeIndex
-	}
-}

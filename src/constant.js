@@ -1,25 +1,39 @@
 import React from 'react'
 
+const imagePath = './images/'
 export const backgroundColor = ['blue', 'red', 'green', 'yellow']
 export const homepageTitle = 'Programming Language'
 export const wavesClassName = 'waves'
+
+const iconNames = ['java', 'c++', 'js', 'php', 'python', 'swift']
 export const startPages = [(
 	<div>
 		<p>
 			We all knows a lot of languages in the past, such as English, French, Japanese and ...Hokkienese. But today, we&apos;re going to talk about another language - programming language.
 		</p>
+		<ul id='icons'>
+			{iconNames.map((name, index) => {
+				return <li key={index}><img src={imagePath + name + '.jpg'} /></li>
+			})}
+		</ul>
 	</div>
 ),(
-	<div>
+	<div className='start-2'>
 		<p>
 			The language we use in common is called natural language. As we all know, the function of natural language is to transfer information between people.
 		</p>
+		<div>
+			<img src={imagePath + 'start_2_1' + '.png'} />
+		</div>
 	</div>
 ),(
-	<div>
+	<div className='start-3'>
 		<p>
 			By contrast, the communication between people and machines is by programming language.
 		</p>
+		<div>
+			<img src={imagePath + 'start_2_2' + '.png'} />
+		</div>
 	</div>
 )]
 

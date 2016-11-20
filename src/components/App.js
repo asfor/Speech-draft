@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {changeBackground, switchView} from '../action'
+import {changeBackground} from '../action'
 import Nav from './Nav'
 import Body from './Body'
 import '../stylesheets/waves.scss'
@@ -10,13 +10,13 @@ class Page extends Component {
 	render() {
 		const {
 			color, list, title, activeIndex,
-			onSwitch, switchView
+			onSwitch
 		} = this.props
 
 		return (
 			<div id='app' className={color}>
 				<Nav list={list} title={title} activeIndex={activeIndex} onSwitch={onSwitch} />
-				<Body switchView={switchView} />
+				<Body />
 			</div>
 		)
 	}
@@ -28,7 +28,6 @@ Page.propTypes = {
 	title: PropTypes.string,
 	activeIndex: PropTypes.arrayOf(PropTypes.number),
 	onSwitch: PropTypes.func,
-	switchView: PropTypes.func
 }
 
 function mapStateToProps(state) {

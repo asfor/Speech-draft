@@ -9,22 +9,16 @@ import '../stylesheets/body.scss'
 
 export default class Body extends Component {
 	render() {
-		const {switchView} = this.props
-
 		return (
 			<Router history={hashHistory}>
 				<Route path='/' component={Homepage} />
-				<Route path='/Start/:activeIndex' component={Start} switchView={switchView} id={0} />
-				<Route path='/Category/:activeIndex' component={Category} switchView={switchView} id={1} />
-				<Route path='/Development/:activeIndex' component={Development} switchView={switchView} id={2} />
-				<Route path='/End/:activeIndex' component={End} switchView={switchView} id={3} />
+				<Route path='/Start/:activeIndex' component={Start} />
+				<Route path='/Category/:activeIndex' component={Category} />
+				<Route path='/Development/:activeIndex' component={Development} />
+				<Route path='/End/:activeIndex' component={End} />
 			</Router>
 		)
 	}
 
 	shouldComponentUpdate() { return false; }
-}
-
-Body.propTypes = {
-	switchView: PropTypes.func
 }
