@@ -10,7 +10,7 @@ module.exports = {
 	},
 	module: {
 		loaders:[
-			{test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=[name].[ext]'},
+			// {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192&name=[name].[ext]'},
 			{test: /\.(sass|scss)$/, loader: 'style!css!sass'},
 			{
 				test: /\.js$/,

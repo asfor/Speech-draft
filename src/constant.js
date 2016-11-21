@@ -31,9 +31,6 @@ export const startPages = [(
 		<p>
 			By contrast, the communication between people and machines is by programming language.
 		</p>
-		<div>
-			<img src={imagePath + 'start_2_2' + '.png'} />
-		</div>
 	</div>
 )]
 
